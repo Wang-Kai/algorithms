@@ -6,8 +6,35 @@ import (
 )
 
 func main() {
-	arr := []int{1, 2, 6, 5, 4, 9009, 3, 23, 2398, 23, 4, 6, 36, 77, 647, 34673}
-	heapSort(arr)
+	arr := []int{1, 2, 6, 5, 4, 90, 33}
+
+	buildMaxHeap(arr)
+
+	fmt.Printf("MAX HEAP ==> %v \n", arr)
+
+	// fmt.Printf("HEAP_MAXIMUM => %d \n", HEAP_MAXIMUM(arr))
+	fmt.Printf("==> %p \n", arr)
+	fmt.Printf("Extract max ==> %d \n new heap is %v \n", HEAP_EXTRACT_MAX(arr), arr)
+}
+
+// HEAP_EXTRACT_MAX 去掉并返回堆中的最大值
+func HEAP_EXTRACT_MAX(H []int) int {
+	fmt.Printf("The HEAP is %v\n", H)
+
+	var max = H[0]
+	H[0], H[len(H)-1] = H[len(H)-1], H[0]
+	heapSize := len(H) - 1
+
+	fmt.Printf("Before MAX HEAPIFY: %v\n", H)
+
+	MAX_HEAPIFY(H[0:heapSize], 0)
+
+	return max
+}
+
+// HEAP_MAMXMUM 返回具有最大关键字的元素
+func HEAP_MAXIMUM(H []int) int {
+	return H[0]
 }
 
 // heapSort 堆排序
@@ -62,7 +89,7 @@ func parent(i int) int {
 // MAX_HEAPIFY 保持最大堆性质
 // 时间复杂度 O(lgn)
 func MAX_HEAPIFY(a []int, i int) {
-	fmt.Printf("Heapify array ==> %v\n", a)
+	fmt.Printf("Do HEAPIFY for %v, and Index is %d \n", a, i)
 
 	l, r := leftChild(i), rightChild(i)
 
